@@ -2,11 +2,10 @@ import { h } from "preact";
 import { NextPage } from "next";
 import { ErrorProps } from "next/error";
 
-type OwnProps = {
+type Props = {
+	statusCode: number;
 	statusDetail: Record<string, string>;
 };
-
-type Props = ErrorProps & OwnProps;
 
 const Error: NextPage<Props> = ({ statusDetail, statusCode }) => {
 	return (
@@ -57,8 +56,8 @@ const Error: NextPage<Props> = ({ statusDetail, statusCode }) => {
 };
 
 Error.getInitialProps = async ({ res, err }) => {
-	const statusCode = res ? res.statusCode : err ? err.statusCode : null;
-	const statusDetail = {
+	const statusCode = res ? res.statusCode : err && err.statusCode ? err.statusCode : -1;
+	const statusDetail: Record<string, string> = {
 		"400": "Bad Request",
 		"401": "Unauthorized",
 		"402": "Payment Required",

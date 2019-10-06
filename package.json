@@ -10,8 +10,10 @@
 		"start": "cross-env NODE_ENV=production node server.js"
 	},
 	"dependencies": {
+		"@bundle-analyzer/webpack-plugin": "^0.5.0",
 		"@zeit/next-css": "1.0.1",
 		"cross-env": "6.0.2",
+		"dotenv": "^8.1.0",
 		"module-alias": "2.2.2",
 		"next": "9.0.7",
 		"preact": "10.0.0",
