@@ -1,5 +1,5 @@
 import { h } from "preact";
-import App, { Container } from "next/app";
+import App from "next/app";
 
 import "../tailwind.css";
 
@@ -8,9 +8,7 @@ class NextApp extends App {
 		const { Component, pageProps } = this.props;
 
 		return (
-			<Container>
-				<Component {...pageProps} />
-			</Container>
+			<Component {...pageProps} />
 		);
 	}
 }
