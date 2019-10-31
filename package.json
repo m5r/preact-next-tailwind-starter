@@ -4,20 +4,19 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"dev": "cross-env PORT=9029 NODE_ENV=development node server.js",
+		"dev": "PORT=9029 NODE_ENV=development node server.js",
 		"build": "next build",
 		"next": "next",
-		"start": "cross-env NODE_ENV=production node server.js"
+		"start": "NODE_ENV=production node server.js"
 	},
 	"dependencies": {
-		"@bundle-analyzer/webpack-plugin": "0.5.0",
+		"@bundle-analyzer/webpack-plugin": "0.5.1",
 		"@zeit/next-css": "1.0.1",
-		"cross-env": "6.0.3",
-		"dotenv": "8.1.0",
+		"dotenv": "8.2.0",
 		"module-alias": "2.2.2",
-		"next": "9.1.1",
-		"preact": "10.0.0",
-		"preact-render-to-string": "5.0.7",
+		"next": "9.1.2",
+		"preact": "10.0.4",
+		"preact-render-to-string": "5.1.0",
 		"preact-ssr-prepass": "1.0.0"
 	},
 	"_moduleAliases": {
@@ -27,15 +26,15 @@
 	},
 	"devDependencies": {
 		"@fullhuman/postcss-purgecss": "1.3.0",
-		"@types/node": "12.11.1",
-		"@types/react": "16.9.9",
-		"autoprefixer": "9.6.5",
+		"@types/node": "12.12.3",
+		"@types/react": "16.9.11",
+		"autoprefixer": "9.7.0",
 		"cssnano": "4.1.10",
 		"postcss-loader": "3.0.0",
-		"react": "16.10.2",
-		"react-dom": "16.10.2",
-		"tailwindcss": "1.1.2",
-		"typescript": "3.7.0-beta"
+		"react": "16.11.0",
+		"react-dom": "16.11.0",
+		"tailwindcss": "1.1.3",
+		"typescript": "3.7.1-rc"
 	},
 	"resolutions": {
 		"lodash": "latest"
