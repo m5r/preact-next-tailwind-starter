@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { h } from "preact";
 import { NextPage } from "next";
 import Router from "next/router";
 

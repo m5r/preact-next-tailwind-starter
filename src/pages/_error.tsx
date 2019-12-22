@@ -1,6 +1,4 @@
-import { h } from "preact";
 import { NextPage } from "next";
-import { ErrorProps } from "next/error";
 
 type Props = {
 	statusCode: number;

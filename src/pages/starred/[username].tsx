@@ -1,9 +1,9 @@
-import React from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import axios from "axios";
 
 import useRequest from "../../useRequest";
+
 import { GithubProject } from "../../github-project";
 
 type APIResponse = GithubProject[];
@@ -18,12 +18,12 @@ const UserStarred: NextPage<Props, InitialProps> = (props) => {
     const router = useRouter();
     const { username } = router.query;
 
-    const { data } = useRequest<APIResponse>(
+    const { data: projects } = useRequest<APIResponse>(
 		{ url: `https://api.github.com/users/${username}/starred?per_page=100` },
 		{ initialData: props.projects },
     );
 
-    if (!data) {
+    if (!projects) {
         return (
             <div>
                 {username} has no starred projects
@@ -36,7 +36,7 @@ const UserStarred: NextPage<Props, InitialProps> = (props) => {
             <h1>{username}'s Starred Projects</h1>
 
             <ul>
-                {data.map(project => <li key={project.id}>{project.name}</li>)}
+                {projects.map(project => <li key={project.id}>{project.name}</li>)}
             </ul>
         </div>
     );
