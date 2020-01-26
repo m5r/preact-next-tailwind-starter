@@ -1,6 +1,6 @@
-const withCSS = require("@zeit/next-css");
-const BundleAnalyzerPlugin = require("@bundle-analyzer/webpack-plugin");
 require("dotenv").config();
+
+const BundleAnalyzerPlugin = require("@bundle-analyzer/webpack-plugin");
 
 function withPreact(nextConfig = {}) {
 	return Object.assign({}, nextConfig, {
@@ -31,7 +31,7 @@ function withPreact(nextConfig = {}) {
 	});
 }
 
-module.exports = withCSS(withPreact({
+module.exports = withPreact({
 	webpack(config) {
 		if (process.env.BUNDLE_ANALYZER_TOKEN) {
 			config.plugins.push(
@@ -44,4 +44,4 @@ module.exports = withCSS(withPreact({
 			plugins: config.plugins,
 		};
 	},
-}));
+});
