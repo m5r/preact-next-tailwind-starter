@@ -1,5 +1,9 @@
 import App from "next/app";
 import Head from "next/head";
+import Amplify from "aws-amplify";
+import config from "../aws-exports";
+
+Amplify.configure(config);
 
 import { pageTitle } from "./_document";
 
