@@ -1,5 +1,11 @@
+@import "styles/animations.css";
+@import "styles/buttons.css";
+@import "styles/datetime.css";
+@import "styles/forms.css";
+
 /* purgecss start ignore */
 @tailwind base;
-/* purgecss end ignore */
 @tailwind components;
+/* purgecss end ignore */
 @tailwind utilities;
+
