@@ -1,8 +1,9 @@
 require("dotenv").config();
 
+const withBundleAnalyzer = require("@next/bundle-analyzer")({ enabled: process.env.ANALYZE === "true" });
 const BundleAnalyzerPlugin = require("@bundle-analyzer/webpack-plugin");
 
-module.exports = {
+const nextConfig = {
 	experimental: {
 		modern: true,
 	},
@@ -18,9 +19,7 @@ module.exports = {
 			const cacheGroups = splitChunks.cacheGroups;
 			const preactModules = /[\\/]node_modules[\\/](preact|preact-render-to-string|preact-context-provider)[\\/]/;
 			if (cacheGroups.framework) {
-				cacheGroups.preact = Object.assign({}, cacheGroups.framework, {
-					test: preactModules,
-				});
+				cacheGroups.preact = Object.assign({}, cacheGroups.framework, { test: preactModules });
 				cacheGroups.commons.name = "framework";
 			} else {
 				cacheGroups.preact = {
@@ -34,3 +33,5 @@ module.exports = {
 		return config;
 	},
 };
+
+module.exports = withBundleAnalyzer(nextConfig);

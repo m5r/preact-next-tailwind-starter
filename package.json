@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"license": "MIT",
 	"scripts": {
+		"analyze": "ANALYZE=true npm run build",
 		"dev": "next --port 9029",
 		"build": "next build",
 		"start": "next start"
@@ -21,6 +22,7 @@
 	"devDependencies": {
 		"@bundle-analyzer/webpack-plugin": "0.5.1",
 		"@fullhuman/postcss-purgecss": "1.3.0",
+		"@next/bundle-analyzer": "9.2.2",
 		"@types/axios": "0.14.0",
 		"@types/node": "13.7.0",
 		"@types/react": "16.9.19",
