@@ -1,19 +1,13 @@
-module.exports = {
-	plugins: [
-		"postcss-easy-import",
-		"tailwindcss",
-		"postcss-preset-env",
-		process.env.NODE_ENV === "production" ?
-			[
-				"@fullhuman/postcss-purgecss",
-				{
-					content: [
-						"./src/pages/**/*.{js,jsx,ts,tsx}",
-						"./src/components/**/*.{js,jsx,ts,tsx}",
-					],
-					defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
-				},
-			] :
-			undefined,
-	],
-};
+const plugins = ["tailwindcss", "postcss-preset-env", "postcss-easy-import"];
+
+if (process.env.NODE_ENV === "production") {
+	plugins.push([
+		"@fullhuman/postcss-purgecss",
+		{
+			content: ["./src/**/*.tsx"],
+			defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
+		},
+	]);
+}
+
+module.exports = { plugins };
