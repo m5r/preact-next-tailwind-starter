@@ -12,6 +12,18 @@ class NextDocument extends Document {
 	}
 
 	render() {
+		try {
+			if (FontFace) {
+				new FontFace(
+					"Inter var",
+					"url('/static/fonts/Inter-roman.var.woff2') format('woff2')",
+					{ style: "normal" },
+				).load();
+			}
+		} catch {
+
+		}
+
 		return (
 			<Html lang="en">
 				<Head>
@@ -31,6 +43,14 @@ class NextDocument extends Document {
 					<meta property="og:image" content={defaultOGImage} />
 					<meta property="og:image:width" content="1200" />
 					<meta property="og:image:height" content="630" />
+
+					<link
+						rel="preload"
+						as="font"
+						type="font/woff2"
+						crossOrigin="anonymous"
+						href="/static/fonts/inter/Inter-roman.var.woff2"
+					/>
 				</Head>
 				<body>
 				<Main />

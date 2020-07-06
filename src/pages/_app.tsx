@@ -3,6 +3,7 @@ import Head from "next/head";
 
 import { pageTitle } from "./_document";
 
+import "../fonts.css";
 import "../tailwind.css";
 
 class NextApp extends App {
