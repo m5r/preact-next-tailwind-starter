@@ -6,7 +6,9 @@
 		"analyze": "ANALYZE=true npm run build",
 		"dev": "next --port 9029",
 		"build": "next build",
-		"start": "next start"
+		"start": "next start",
+		"test": "jest --coverage",
+		"test:watch": "jest --watch"
 	},
 	"dependencies": {
 		"@tailwindcss/ui": "0.3.0",
@@ -26,13 +28,20 @@
 		"@prefresh/next": "0.3.1",
 		"@types/axios": "0.14.0",
 		"@types/css-font-loading-module": "0.0.4",
+		"@types/isomorphic-fetch": "0.0.35",
+		"@types/jest": "26.0.4",
 		"@types/node": "14.0.14",
 		"@types/react": "16.9.41",
+		"@types/test-listen": "^1.1.0",
+		"babel-jest": "26.1.0",
+		"isomorphic-fetch": "2.2.1",
+		"jest": "26.1.0",
 		"postcss-easy-import": "3.0.0",
 		"postcss-loader": "3.0.0",
 		"postcss-preset-env": "6.7.0",
 		"react-refresh": "0.8.3",
 		"tailwindcss": "1.4.6",
+		"test-listen": "1.1.0",
 		"typescript": "3.9.6"
 	}
 }
