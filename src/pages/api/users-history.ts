@@ -66,5 +66,6 @@ function insertUser(req: NextApiRequest, res: NextApiResponse<Response>): void {
 		return res.status(500).end();
 	}
 
+	res.setHeader("Content-Type", "application/json");
 	res.status(200).end();
 }

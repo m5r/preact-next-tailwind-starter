@@ -1,3 +1,4 @@
+import { useEffect } from "preact/hooks";
 import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -24,6 +25,10 @@ const UserStarred: NextPage<Props> = (props) => {
 		{ url: `https://api.github.com/users/${username}/starred?per_page=100` },
 		{ initialData: props.projects },
 	);
+
+	useEffect(() => {
+		axios.put("/api/users-history", { user: username });
+	}, [username]);
 
 	if (!projects) {
 		return (
