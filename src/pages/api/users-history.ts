@@ -10,7 +10,7 @@ type ApiError = {
 
 type Response = Data | ApiError;
 
-let users: string[] = [];
+let users: Set<string> = new Set();
 
 export default async function usersHistory(req: NextApiRequest, res: NextApiResponse<Response>): Promise<void> {
 	switch (req.method) {
@@ -31,7 +31,7 @@ export default async function usersHistory(req: NextApiRequest, res: NextApiResp
 }
 
 function getUsersHistory(res: NextApiResponse<Response>): void {
-	res.status(200).json({ users });
+	res.status(200).json({ users: Array.from(users).reverse() });
 }
 
 type Body = {
@@ -56,11 +56,11 @@ function insertUser(req: NextApiRequest, res: NextApiResponse<Response>): void {
 	}
 
 	try {
-		if (users.indexOf(body.user) > -1) {
-			users.splice(users.indexOf(body.user), 1);
+		if (users.has(body.user)) {
+			users.delete(body.user);
 		}
 
-		users.unshift(body.user);
+		users.add(body.user);
 	} catch (e) {
 		console.error(e);
 		return res.status(500).end();
