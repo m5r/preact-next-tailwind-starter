@@ -9,18 +9,21 @@ describe("/api/users-history", () => {
 	});
 
 	test("Nominal test case", async () => {
-		const putResponse = await callNowHandler(usersHistory, {
-			method: "PUT",
-			body: { user: "m5r" },
-		});
+		const usernamesToInsert = ["m5r", "mokhtar", "m5r", "dj-khaled"]
+		await Promise.all(usernamesToInsert.map(async (user) => {
+			const putResponse = await callNowHandler(usersHistory, {
+				method: "PUT",
+				body: { user },
+			});
 
-		expect(putResponse.status).toBe(200);
+			expect(putResponse.status).toBe(200);
+		}))
 
 		const getResponse = await callNowHandler(usersHistory, { method: "GET" });
 		const body = await getResponse.json();
 
 		expect(getResponse.status).toBe(200);
-		expect(body).toStrictEqual({ users: ["m5r"] });
+		expect(body).toStrictEqual({ users: ["dj-khaled", "m5r", "mokhtar"] });
 	});
 
 	test("PUT /api/users-history - malformed body error", async () => {

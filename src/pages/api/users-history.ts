@@ -56,7 +56,11 @@ function insertUser(req: NextApiRequest, res: NextApiResponse<Response>): void {
 	}
 
 	try {
-		users.push(body.user);
+		if (users.indexOf(body.user) > -1) {
+			users.splice(users.indexOf(body.user), 1);
+		}
+
+		users.unshift(body.user);
 	} catch (e) {
 		console.error(e);
 		return res.status(500).end();
