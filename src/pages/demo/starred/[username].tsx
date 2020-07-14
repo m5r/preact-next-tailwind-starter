@@ -10,7 +10,7 @@ import Layout from "../../../components/layout";
 type APIResponse = GithubProject[];
 
 type Props = {
-	projects: GithubProject[];
+	projects: GithubProject[] | null;
 	prevPage: number | null;
 	nextPage: number | null;
 	lastPage: number | null;
@@ -37,6 +37,14 @@ const UserStarred: NextPage<Props> = (props) => {
 	const page = router.query.page && !Array.isArray(router.query.page) ? parseInt(router.query.page, 10) : 1;
 	const pageNumbers = buildPageNumbers(props.lastPage ?? page);
 
+	if (!props.projects) {
+		return (
+			<Layout title={`${username}'s Starred Projects`}>
+				{username} has no starred projects
+			</Layout>
+		);
+	}
+
 	const { data: projects } = useRequest<APIResponse>(
 		{ url: `https://api.github.com/users/${username}/starred?per_page=30&page=${page}` },
 		{ initialData: props.projects },
@@ -46,21 +54,11 @@ const UserStarred: NextPage<Props> = (props) => {
 		axios.put("/api/users-history", { user: username });
 	}, [username]);
 
-	useEffect(() => {
-		if (props.prevPage !== null) {
-			router.prefetch(`/demo/starred/${username}?page=${props.prevPage}`);
-		}
-
-		if (props.nextPage !== null) {
-			router.prefetch(`/demo/starred/${username}?page=${props.nextPage}`);
-		}
-	}, [props.prevPage, props.nextPage]);
-
 	if (!projects) {
 		return (
-			<div>
-				{username} has no starred projects
-			</div>
+			<Layout title={`${username}'s Starred Projects`}>
+				Loading {username}'s starred projects...
+			</Layout>
 		);
 	}
 
@@ -208,17 +206,28 @@ export const getServerSideProps: GetServerSideProps<Props, Query> = async (conte
 	const username = context.params?.username;
 	const page = context.query.page && !Array.isArray(context.query.page) ? parseInt(context.query.page, 10) : 1;
 	const url = `https://api.github.com/users/${username}/starred?per_page=30&page=${page}`;
-	const { data, headers } = await axios.get<APIResponse>(url);
-	const links = (await import("parse-link-header")).default(headers.link);
+	try {
+		const { data, headers } = await axios.get<APIResponse>(url);
+		const links = (await import("parse-link-header")).default(headers.link);
 
-	return {
-		props: {
-			projects: data,
-			prevPage: links!.prev ? parseInt(links!.prev.page, 10) : null,
-			nextPage: links!.next ? parseInt(links!.next.page, 10) : null,
-			lastPage: links!.last ? parseInt(links!.last.page, 10) : null,
-		},
-	};
+		return {
+			props: {
+				projects: data,
+				prevPage: links!.prev ? parseInt(links!.prev.page, 10) : null,
+				nextPage: links!.next ? parseInt(links!.next.page, 10) : null,
+				lastPage: links!.last ? parseInt(links!.last.page, 10) : null,
+			},
+		};
+	} catch {
+		return {
+			props: {
+				projects: null,
+				lastPage: null,
+				nextPage: null,
+				prevPage: null,
+			},
+		};
+	}
 };
 
 export default UserStarred;

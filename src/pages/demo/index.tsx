@@ -14,8 +14,10 @@ const Index: NextPage = () => {
 		{ url: "/api/users-history" },
 	);
 	const [username, setUsername] = useState("");
+	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	async function onFormSubmit() {
+		setIsSubmitting(true);
 		return Router.push(`/demo/starred/${username}`);
 	}
 
@@ -38,6 +40,7 @@ const Index: NextPage = () => {
 							placeholder="m5r"
 							value={username}
 							onChange={e => setUsername(e.target.value)}
+							required
 						/>
 					</div>
 				</div>
@@ -46,8 +49,9 @@ const Index: NextPage = () => {
 					<span className="shadow-sm rounded-md ml-auto">
 						<input
 							type="submit"
-							className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700 transition duration-150 ease-in-out"
-							value="Submit"
+							className={`${isSubmitting ? "opacity-50" : ""} inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700 transition duration-150 ease-in-out`}
+							value={isSubmitting ? "Loading..." : "Submit"}
+							disabled={isSubmitting}
 						/>
 					</span>
 				</div>
