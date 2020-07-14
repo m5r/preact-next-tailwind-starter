@@ -3,11 +3,11 @@ import { NextPage } from "next";
 import Router from "next/router";
 import Link from "next/link";
 
-import useRequest from "../useRequest";
+import useRequest from "../../useRequest";
 
 type APIResponse = { users: string[]; };
 
-const Demo: NextPage = () => {
+const Index: NextPage = () => {
 	const { data: usersHistory } = useRequest<APIResponse>(
 		{ url: "/api/users-history" },
 		{ initialData: { users: [] } },
@@ -15,7 +15,7 @@ const Demo: NextPage = () => {
 	const [username, setUsername] = useState("");
 
 	async function onFormSubmit() {
-		return Router.push(`/starred/${username}`);
+		return Router.push(`/demo/starred/${username}`);
 	}
 
 	return (
@@ -42,7 +42,7 @@ const Demo: NextPage = () => {
 					<ul>
 						{usersHistory?.users.map((user) => (
 							<li key={user}>
-								<Link href={`/starred/${user}`}>
+								<Link href={`/demo/starred/${user}`}>
 									<a>{user}</a>
 								</Link>
 							</li>
@@ -54,4 +54,4 @@ const Demo: NextPage = () => {
 	);
 };
 
-export default Demo;
+export default Index;
