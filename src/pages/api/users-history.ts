@@ -1,5 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
+import * as cache from "./_cache";
+
 type Data = {
 	users: string[];
 }
@@ -9,8 +11,6 @@ type ApiError = {
 }
 
 type Response = Data | ApiError;
-
-let users: Set<string> = new Set();
 
 export default async function usersHistory(req: NextApiRequest, res: NextApiResponse<Response>): Promise<void> {
 	switch (req.method) {
@@ -31,7 +31,7 @@ export default async function usersHistory(req: NextApiRequest, res: NextApiResp
 }
 
 function getUsersHistory(res: NextApiResponse<Response>): void {
-	res.status(200).json({ users: Array.from(users).reverse() });
+	res.status(200).json({ users: cache.getAll().reverse() });
 }
 
 type Body = {
@@ -56,11 +56,7 @@ function insertUser(req: NextApiRequest, res: NextApiResponse<Response>): void {
 	}
 
 	try {
-		if (users.has(body.user)) {
-			users.delete(body.user);
-		}
-
-		users.add(body.user);
+		cache.add(body.user);
 	} catch (e) {
 		console.error(e);
 		return res.status(500).end();
