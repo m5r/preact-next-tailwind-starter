@@ -3,6 +3,8 @@ import { NextPage } from "next";
 import Router from "next/router";
 import Link from "next/link";
 
+import Layout from "../../components/layout";
+
 import useRequest from "../../useRequest";
 
 type APIResponse = { users: string[]; };
@@ -19,7 +21,7 @@ const Index: NextPage = () => {
 	}
 
 	return (
-		<div>
+		<Layout>
 			<h1>Github User's Starred Projects</h1>
 
 			<form onSubmit={onFormSubmit}>
@@ -50,7 +52,7 @@ const Index: NextPage = () => {
 					</ul>
 				</section>
 			)}
-		</div>
+		</Layout>
 	);
 };
 
