@@ -1,7 +1,12 @@
 import { FunctionComponent, useState } from "react";
+
 import Transition from "./transition";
 
-const Layout: FunctionComponent = ({ children }) => {
+type Props = {
+	title: string;
+}
+
+const Layout: FunctionComponent<Props> = ({ children, title }) => {
 	const [isProfilePanelOpen, setIsProfilePanelOpen] = useState(false);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -140,7 +145,7 @@ const Layout: FunctionComponent = ({ children }) => {
 				<header className="py-10">
 					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 						<h1 className="text-3xl leading-9 font-bold text-white">
-							Dashboard
+							{title}
 						</h1>
 					</div>
 				</header>

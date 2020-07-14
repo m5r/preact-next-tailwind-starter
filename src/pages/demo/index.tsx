@@ -20,13 +20,7 @@ const Index: NextPage = () => {
 	}
 
 	return (
-		<Layout>
-			<div className="flex-1 min-w-0 pb-8">
-				<h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate">
-					Github User's Starred Projects
-				</h2>
-			</div>
-
+		<Layout title="Github User's Starred Projects">
 			<form
 				onSubmit={onFormSubmit}
 				className="md:flex md:items-center md:justify-between"
