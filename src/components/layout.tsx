@@ -1,4 +1,6 @@
 import { FunctionComponent, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 import Transition from "./transition";
 
@@ -9,6 +11,11 @@ type Props = {
 const Layout: FunctionComponent<Props> = ({ children, title }) => {
 	const [isProfilePanelOpen, setIsProfilePanelOpen] = useState(false);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const router = useRouter();
+
+	const currentPage = router.pathname;
+	const currentPageLinkStyle = "text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700";
+	const pageLinkStyle = "text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700";
 
 	return (
 		<>
@@ -23,11 +30,20 @@ const Layout: FunctionComponent<Props> = ({ children, title }) => {
 									</div>
 									<div className="hidden md:block">
 										<div className="ml-10 flex items-baseline">
-											<a href="#" className="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Dashboard</a>
-											<a href="#" className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Team</a>
-											<a href="#" className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Projects</a>
-											<a href="#" className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Calendar</a>
-											<a href="#" className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Reports</a>
+											<Link href="/demo">
+												<a
+													className={`${currentPage.startsWith("/demo") ? currentPageLinkStyle : pageLinkStyle} px-3 py-2 rounded-md text-sm font-medium`}
+												>
+													Demo
+												</a>
+											</Link>
+											<Link href="/">
+												<a
+													className={`${pageLinkStyle} ml-4 px-3 py-2 rounded-md text-sm font-medium`}
+												>
+													Landing
+												</a>
+											</Link>
 										</div>
 									</div>
 								</div>
@@ -47,7 +63,7 @@ const Layout: FunctionComponent<Props> = ({ children, title }) => {
 										<div className="ml-3 relative">
 											<div>
 												<button
-													onClick={() => setIsProfilePanelOpen(prev => !prev)}
+													onClick={() => setIsProfilePanelOpen(prevValue => !prevValue)}
 													className="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid"
 													id="user-menu"
 													aria-label="User menu"
@@ -80,7 +96,7 @@ const Layout: FunctionComponent<Props> = ({ children, title }) => {
 										</div>
 									</div>
 								</div>
-								<div onClick={() => setIsMenuOpen(prev => !prev)} className="-mr-2 flex md:hidden">
+								<div onClick={() => setIsMenuOpen(prevValue => !prevValue)} className="-mr-2 flex md:hidden">
 									<button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white">
 										<svg className={`${isMenuOpen ? "hidden" : "block"} h-6 w-6`} stroke="currentColor" fill="none" viewBox="0 0 24 24">
 											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -96,11 +112,20 @@ const Layout: FunctionComponent<Props> = ({ children, title }) => {
 
 					<div className={`${isMenuOpen ? "block" : "hidden"} border-b border-gray-700 md:hidden`}>
 						<div className="px-2 py-3 sm:px-3">
-							<a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Dashboard</a>
-							<a href="#" className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Team</a>
-							<a href="#" className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Projects</a>
-							<a href="#" className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Calendar</a>
-							<a href="#" className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Reports</a>
+							<Link href="/demo">
+								<a
+									className={`${currentPage.startsWith("/demo") ? currentPageLinkStyle : pageLinkStyle} block px-3 py-2 rounded-md text-base font-medium`}
+								>
+									Demo
+								</a>
+							</Link>
+							<Link href="/">
+								<a
+									className={`${pageLinkStyle} mt-1 block px-3 py-2 rounded-md text-base font-medium`}
+								>
+									Landing
+								</a>
+							</Link>
 						</div>
 						<div className="pt-4 pb-3 border-t border-gray-700">
 							<div className="flex items-center px-5">
