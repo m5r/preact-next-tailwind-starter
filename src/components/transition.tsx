@@ -1,5 +1,4 @@
-import { ComponentChildren, createContext } from "preact";
-import { useContext, useEffect, useRef } from "preact/hooks";
+import { ReactChild, createContext, useContext, useEffect, useRef } from "react";
 import { CSSTransition as ReactCSSTransition } from "react-transition-group";
 
 type Context = {
@@ -31,7 +30,7 @@ type CSSTransitionParams = {
 	leave?: string;
 	leaveFrom?: string;
 	leaveTo?: string;
-	children?: ComponentChildren;
+	children?: ReactChild;
 }
 
 function CSSTransition({

@@ -1,5 +1,4 @@
-import { FunctionComponent, RefObject } from "preact";
-import { useEffect, useRef } from "preact/hooks";
+import { FunctionComponent, RefObject, useEffect, useRef } from "react";
 
 type Handler = (event: MouseEvent) => void;
 

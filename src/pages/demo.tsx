@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks";
+import { useState } from "react";
 import { NextPage } from "next";
 import Router from "next/router";
 import Link from "next/link";
