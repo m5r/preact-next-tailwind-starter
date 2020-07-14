@@ -12,7 +12,6 @@ type APIResponse = { users: string[]; };
 const Index: NextPage = () => {
 	const { data: usersHistory } = useRequest<APIResponse>(
 		{ url: "/api/users-history" },
-		{ initialData: { users: [] } },
 	);
 	const [username, setUsername] = useState("");
 
