@@ -1,9 +1,11 @@
 # Developer-friendly Web App Starter
 
-<img src="https://seeklogo.com/images/T/typescript-logo-B29A3F462D-seeklogo.com.png" alt="Typescript logo" width="50"/>
-<img src="https://preactjs.com/assets/app-icon.png" alt="Preact logo" width="50"/>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png" alt="Next.js logo" width="50"/>
-<img src="https://seeklogo.com/images/T/tailwind-css-logo-5AD4175897-seeklogo.com.png" alt="Tailwind CSS logo" width="50"/>
+<p float="left">
+    <img src="https://seeklogo.com/images/T/typescript-logo-B29A3F462D-seeklogo.com.png" alt="Typescript logo" width="50"/>
+    <img src="https://preactjs.com/assets/app-icon.png" alt="Preact logo" width="50"/>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png" alt="Next.js logo" width="50"/>
+    <img src="https://seeklogo.com/images/T/tailwind-css-logo-5AD4175897-seeklogo.com.png" alt="Tailwind CSS logo" width="50"/>
+</p>
 
 ## Getting started
 
