@@ -31,11 +31,11 @@ const Index: NextPage = () => {
 					<label htmlFor="username" className="block text-sm font-medium leading-5 text-gray-700">GitHub Username</label>
 					<div className="mt-1 relative rounded-md shadow-sm">
 						<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-							<span className="text-gray-500 sm:text-sm sm:leading-5">http://github.com/</span>
+							<span className="text-gray-500 sm:text-sm sm:leading-5">https://github.com/</span>
 						</div>
 						<input
 							id="username"
-							className="form-input block w-full pl-38 sm:pl-33 sm:text-sm sm:leading-5"
+							className="form-input block w-full pl-39 sm:pl-35 sm:text-sm sm:leading-5"
 							type="text"
 							placeholder="m5r"
 							value={username}
