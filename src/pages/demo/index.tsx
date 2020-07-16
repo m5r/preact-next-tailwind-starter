@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { NextPage } from "next";
 import Router from "next/router";
 import Link from "next/link";
@@ -16,9 +16,11 @@ const Index: NextPage = () => {
 	const [username, setUsername] = useState("");
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
-	async function onFormSubmit() {
+	function onFormSubmit(event: FormEvent<HTMLFormElement>) {
+		event.preventDefault();
 		setIsSubmitting(true);
-		return Router.push(`/demo/starred/${username}`);
+
+		Router.push(`/demo/starred/${username}`);
 	}
 
 	return (
@@ -48,6 +50,7 @@ const Index: NextPage = () => {
 				<div className="mt-4 flex md:mt-auto md:ml-4">
 					<span className="shadow-sm rounded-md ml-auto">
 						<input
+							data-testId="github-stars-form"
 							type="submit"
 							className={`${isSubmitting ? "opacity-50" : ""} inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700 transition duration-150 ease-in-out`}
 							value={isSubmitting ? "Loading..." : "Submit"}
