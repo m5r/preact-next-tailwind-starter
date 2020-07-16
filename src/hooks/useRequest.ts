@@ -1,7 +1,9 @@
 import useSWR, { ConfigInterface, responseInterface } from "swr";
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 
-interface Return<Data, Error> extends Pick<responseInterface<AxiosResponse<Data>, AxiosError<Error>>, "isValidating" | "revalidate" | "error"> {
+export type GetRequest = AxiosRequestConfig | null;
+
+interface Return<Data, Error> extends Pick<responseInterface<AxiosResponse<Data>, AxiosError<Error>>, "isValidating" | "revalidate" | "error" | "mutate"> {
 	data: Data | undefined;
 	response: AxiosResponse<Data> | undefined;
 }
@@ -11,19 +13,23 @@ export interface Config<Data = unknown, Error = unknown> extends Omit<ConfigInte
 }
 
 export default function useRequest<Data = unknown, Error = unknown>(
-	request: AxiosRequestConfig,
+	request: GetRequest,
 	{ initialData, ...config }: Config<Data, Error> = {},
 ): Return<Data, Error> {
-	const { data: response, error, isValidating, revalidate } =
+	const { data: response, error, isValidating, revalidate, mutate } =
 		useSWR<AxiosResponse<Data>, AxiosError<Error>>(
 			request && JSON.stringify(request),
-			() => axios(request || {}),
+			/**
+			 * NOTE: Typescript thinks `request` can be `null` here, but the fetcher
+			 * function is actually only called by `useSWR` when it isn't.
+			 */
+			() => axios(request!),
 			{
 				...config,
 				initialData: initialData && {
 					status: 200,
 					statusText: "InitialData",
-					config: request,
+					config: request!,
 					headers: {},
 					data: initialData,
 				},
@@ -36,5 +42,6 @@ export default function useRequest<Data = unknown, Error = unknown>(
 		error,
 		isValidating,
 		revalidate,
+		mutate,
 	};
 }
