@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import Layout from "../../components/layout";
 
-import useRequest from "../../useRequest";
+import useRequest from "../../hooks/useRequest";
 
 type APIResponse = { users: string[]; };
 

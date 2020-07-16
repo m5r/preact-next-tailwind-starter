@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import axios from "axios";
 
-import useRequest from "../../../useRequest";
+import useRequest from "../../../hooks/useRequest";
 import Layout from "../../../components/layout";
 
 type APIResponse = GithubProject[];
