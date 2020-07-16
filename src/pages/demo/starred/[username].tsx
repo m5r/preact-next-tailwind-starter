@@ -37,7 +37,7 @@ const UserStarred: NextPage<Props> = (props) => {
 	const page = router.query.page && !Array.isArray(router.query.page) ? parseInt(router.query.page, 10) : 1;
 	const pageNumbers = buildPageNumbers(props.lastPage ?? page);
 
-	if (!props.projects) {
+	if (!props.projects || props.projects.length === 0) {
 		return (
 			<Layout title={`${username}'s Starred Projects`}>
 				{username} has no starred projects
