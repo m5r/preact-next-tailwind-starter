@@ -1,6 +1,8 @@
 import "@testing-library/jest-dom/extend-expect";
-import { fireEvent, render } from "@testing-library/preact";
+import { fireEvent, render, waitFor } from "@testing-library/preact";
 import userEvent from "@testing-library/user-event";
+import { rest } from "msw";
+import { setupServer } from "msw/node";
 
 import Router from "next/router";
 
@@ -17,16 +19,34 @@ jest.mock("next/router", () => ({
 describe("/demo", () => {
 	const mockedRouterPush = Router.push as ReturnType<typeof jest.fn>;
 
+	const server = setupServer(
+		rest.get("/api/users-history", (req, res, ctx) => {
+			console.log("hello world");
+
+			return res(ctx.json({ users: ["dddd"] }));
+		}),
+	);
+
 	beforeEach(() => {
 		mockedRouterPush.mockReset();
 	});
+	beforeAll(() => {
+		server.listen();
+	});
+	afterAll(() => {
+		server.close();
+	});
 
-	test("sets loading state after submitting form", async () => {
-		const { getByLabelText, getByTestId } = render(<DemoIndexPage />);
+	test("redirect user to /demo/starred/:username after submitting form", async () => {
+		const { getByLabelText, getByText } = render(<DemoIndexPage />);
 		const ghUsername = "m5r";
 
+		await waitFor(() => {
+			expect(getByText("Recent searches")).toBeInTheDocument();
+		});
+
 		await userEvent.type(getByLabelText("GitHub Username"), ghUsername);
-		await fireEvent.click(getByTestId("github-stars-form"));
+		await fireEvent.click(getByText("Submit"));
 
 		expect(mockedRouterPush).toHaveBeenCalledWith("/demo/starred/m5r");
 	});
