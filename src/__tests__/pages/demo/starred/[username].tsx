@@ -49,7 +49,7 @@ describe("/demo/starred/:username", () => {
 			{
 				id: 30,
 				html_url: "html_url",
-				name: "30",
+				name: "30th project",
 				stargazers_count: 1,
 				open_issues_count: 0,
 				updated_at: "2020-07-02T10:19:05Z",
@@ -66,5 +66,6 @@ describe("/demo/starred/:username", () => {
 		);
 
 		expect(getByText("Project 29")).toBeInTheDocument();
+		expect(getByText("30th project")).toBeInTheDocument();
 	});
 });
