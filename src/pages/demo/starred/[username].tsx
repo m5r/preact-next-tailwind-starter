@@ -208,14 +208,14 @@ export const getServerSideProps: GetServerSideProps<Props, Query> = async (conte
 	const url = `https://api.github.com/users/${username}/starred?per_page=30&page=${page}`;
 	try {
 		const { data, headers } = await axios.get<APIResponse>(url);
-		const links = (await import("parse-link-header")).default(headers.link);
+		const links = headers.link ? (await import("parse-link-header")).default(headers.link) : null;
 
 		return {
 			props: {
 				projects: data,
-				prevPage: links!.prev ? parseInt(links!.prev.page, 10) : null,
-				nextPage: links!.next ? parseInt(links!.next.page, 10) : null,
-				lastPage: links!.last ? parseInt(links!.last.page, 10) : null,
+				prevPage: links?.prev ? parseInt(links.prev.page, 10) : null,
+				nextPage: links?.next ? parseInt(links.next.page, 10) : null,
+				lastPage: links?.last ? parseInt(links.last.page, 10) : null,
 			},
 		};
 	} catch {
