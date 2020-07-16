@@ -21,8 +21,6 @@ describe("/demo", () => {
 
 	const server = setupServer(
 		rest.get("/api/users-history", (req, res, ctx) => {
-			console.log("hello world");
-
 			return res(ctx.json({ users: ["dddd"] }));
 		}),
 	);
